@@ -14,7 +14,7 @@ public class AccountingManagement {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new NewJFrame().setVisible(true);
+                new Login().setVisible(true);
             }
         });
     }
