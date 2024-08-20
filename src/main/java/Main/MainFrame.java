@@ -7,6 +7,7 @@ package Main;
 
 
 import AccountsReceivable.AccountsReceivable;
+import Employee.EmployeePanel;
 import FinancialReporting.FinancialReporting;
 import GeneralLedger.GeneralLedgerPanel;
 import InventoryManagement.InventoryManagement;
@@ -40,6 +41,7 @@ public class MainFrame extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         mainPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -74,6 +76,13 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        jButton5.setText("Employee");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -83,7 +92,9 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(jButton1)
                 .addGap(128, 128, 128)
                 .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 155, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
                 .addComponent(jButton3)
                 .addGap(105, 105, 105)
                 .addComponent(jButton4)
@@ -97,7 +108,8 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jButton1)
                     .addComponent(jButton2)
                     .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(jButton4)
+                    .addComponent(jButton5))
                 .addGap(34, 34, 34))
         );
 
@@ -145,6 +157,11 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         loadPanel(new FinancialReporting());
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        loadPanel(new EmployeePanel());
+    }//GEN-LAST:event_jButton5ActionPerformed
     
     private void loadPanel(JPanel newPanel) {
         mainPanel.removeAll();  // Remove the existing panel
@@ -196,6 +213,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel mainPanel;
     // End of variables declaration//GEN-END:variables
