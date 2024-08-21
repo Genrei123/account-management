@@ -116,7 +116,7 @@ public class Login extends javax.swing.JFrame {
         );
 
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\joshu\\OneDrive\\Desktop\\AccountingSystem\\account-management\\Images\\Logo2.png")); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Documents\\NetBeansProjects\\account-management\\src\\resources\\Logo2.png")); // NOI18N
         jLabel5.setText("jLabel5");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
