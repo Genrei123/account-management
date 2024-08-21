@@ -46,8 +46,11 @@ public class MainFrame extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(1200, 500));
+        setMinimumSize(new java.awt.Dimension(1200, 500));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setMinimumSize(new java.awt.Dimension(1277, 150));
 
         jLabel1.setBackground(new java.awt.Color(204, 204, 204));
         jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\joshu\\OneDrive\\Desktop\\AccountingSystem\\account-management\\Images\\Logo2.png")); // NOI18N
