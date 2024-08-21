@@ -34,6 +34,8 @@ public class AccountsPayableAndReceiveable extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
 
+        setMinimumSize(new java.awt.Dimension(914, 564));
+
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
