@@ -4,6 +4,12 @@
  */
 package InventoryManagement;
 
+import Database.Database;
+import Database.OverlayPanel;
+import Payroll.AddEmployee;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+
 /**
  *
  * @author joshu
@@ -15,6 +21,9 @@ public class ItemPanel extends javax.swing.JPanel {
      */
     public ItemPanel() {
         initComponents();
+        
+        Database loadTable = new Database();
+        loadTable.displayTable(inventoryTable, "inventory");
     }
 
     /**
@@ -27,12 +36,13 @@ public class ItemPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        inventoryTable = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jToggleButton1 = new javax.swing.JToggleButton();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        inventoryTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -43,7 +53,12 @@ public class ItemPanel extends javax.swing.JPanel {
                 "Item Name", "Account #", "Stock", "Last Updated"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        inventoryTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                inventoryTableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(inventoryTable);
 
         jPanel1.setBackground(new java.awt.Color(0, 51, 102));
 
@@ -61,6 +76,13 @@ public class ItemPanel extends javax.swing.JPanel {
             }
         });
 
+        jToggleButton1.setText("CANCEL");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -70,7 +92,9 @@ public class ItemPanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jToggleButton1)
+                .addGap(19, 19, 19))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -80,6 +104,10 @@ public class ItemPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
                 .addGap(19, 19, 19))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jToggleButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -106,18 +134,51 @@ public class ItemPanel extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        Database deleteRow = new Database();
+        deleteRow.deleteSelectedRows(inventoryTable, "inventory");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        OverlayPanel new_Stock = new OverlayPanel();
+        new_Stock.modifyContent(new AddInventory());
+        
+        new_Stock.show();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        // TODO add your handling code here:
+        JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        if (parentFrame != null) {
+            parentFrame.dispose();
+        }
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
+
+    private void performActionOnRow(int row) {
+        Object data = inventoryTable.getValueAt(row, 0);
+        System.out.println("Row: " + row + " clicked with data: " + data);
+        
+        OverlayPanel itemView = new OverlayPanel();
+        itemView.modifyContent(new InventoryManagement(data));
+        itemView.setVisible(true);
+    }
+    
+    private void inventoryTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inventoryTableMouseClicked
+        // TODO add your handling code here:
+        int row = inventoryTable.rowAtPoint(evt.getPoint());
+        
+        if (row >= 0) {
+            performActionOnRow(row);
+        }
+    }//GEN-LAST:event_inventoryTableMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable inventoryTable;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
 }
