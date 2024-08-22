@@ -63,6 +63,26 @@ public class Database {
         }
     }
     
+    public void addClient(String name, String account_no) throws SQLException {
+        try (Connection conn = getConnect()) {
+            LocalDate date = LocalDate.now();
+            String query = "INSERT INTO clients (account_name, account_no, date) VALUES (?, ?, ?)";
+            try (PreparedStatement pstmt = conn.prepareStatement(query)) {
+                
+                pstmt.setString(1, name);
+                pstmt.setString(2, account_no);
+                pstmt.setObject(3, date);
+                
+                pstmt.executeUpdate();
+                
+                
+           
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+    
     public void addInventory(String item_name, LocalDate date, int stock, Double cost, String account_no) throws SQLException {
         int inventoryId = 0;
         try (Connection conn = getConnect()) {
@@ -95,6 +115,35 @@ public class Database {
             }
         }
     }
+    
+    public void updateInventory(int inventoryId, String item_name, LocalDate date, int stock, Double cost, String account_no) throws SQLException {
+        try (Connection conn = getConnect()) {
+            // Update the inventory table
+            String updateInventoryQuery = "UPDATE inventory SET item_name = ?, date = ?, stock = ?, cost = ? WHERE id = ?";
+            try (PreparedStatement pstmt = conn.prepareStatement(updateInventoryQuery)) {
+                pstmt.setString(1, item_name);
+                pstmt.setObject(2, date);
+                pstmt.setInt(3, stock);
+                pstmt.setDouble(4, cost);
+                pstmt.setInt(5, inventoryId);
+
+                pstmt.executeUpdate();
+            }
+
+            // Update the ledger table
+            String updateLedgerQuery = "UPDATE ledger SET date = ?, account_no = ? WHERE inventory_id = ?";
+            try (PreparedStatement prepared = conn.prepareStatement(updateLedgerQuery)) {
+                prepared.setObject(1, date);
+                prepared.setString(2, account_no);
+                prepared.setInt(3, inventoryId);
+
+                prepared.executeUpdate();
+            }
+        }
+    }
+
+    
+    
     
     
     

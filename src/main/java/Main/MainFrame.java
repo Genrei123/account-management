@@ -6,7 +6,7 @@ package Main;
  */
 
 
-import Employee.EmployeePanel;
+import Client.ClientsPanel;
 import GeneralLedger.GeneralLedgerPanel;
 import InventoryManagement.InventoryManagement;
 import InventoryManagement.ItemPanel;
@@ -48,7 +48,6 @@ public class MainFrame extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1200, 500));
         setMinimumSize(new java.awt.Dimension(1200, 500));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -100,6 +99,11 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         jButton2.setText("Clients");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -169,6 +173,11 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         loadPanel (new Payroll());
     }//GEN-LAST:event_jToggleButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        loadPanel(new ClientsPanel());
+    }//GEN-LAST:event_jButton2ActionPerformed
     
     private void loadPanel(JPanel newPanel) {
         mainPanel.removeAll();  // Remove the existing panel
